@@ -1,0 +1,34 @@
+<div>
+  <h2>the blog ced</h2>
+  <div id="articles">
+    write the articles
+  </div>
+</div>
+
+<script>
+  const displayArticles = async () => {
+    const res = await fetch('articles')
+    const articles = await res.json()
+    console.log("display articles ", articles);
+
+    const container = document.querySelector('#articles')
+    container.innerHTML = ''
+    articles.forEach(article => {
+      /** image **/
+      const image= document.createElement('img')
+      image.setAttribute('src',article.thumbnail.url)
+      container.appendChild(image)
+      /** TITLE **/
+      const title = document.createElement('h3')
+      title.innerText = article.title
+      container.appendChild(title)
+
+      /** CONTENT **/
+      const content = document.createElement('div')
+      content.innerText = article.content
+      container.appendChild(content)
+
+    })
+  }
+  displayArticles()
+</script>
